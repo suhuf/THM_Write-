@@ -24,7 +24,7 @@
 ☐ Benign
 
 
-☐ Friday overtime (real world apt artifacts on Evasive Panda APT**)
+☐ Friday overtime (real world APT artifacts on Evasive Panda APT)
 
 ☐ Summit
 
