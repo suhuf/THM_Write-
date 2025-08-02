@@ -110,7 +110,36 @@ Now the next question:
 
 **The attacker uses ntdsutil to create a copy of the AD database. After moving the file to a web server, the attacker compresses the database. What password does the attacker set on the archive?**
 
-As expected our APT is very attached to using Living Off the Land binary techniques, since we know what binary is used in this case we should set a filter for actions executed by that binary and analyze what is found
+As expected our APT is very attached to using Living Off the Land binary techniques, since we know what binary is used in this case we should set a filter for actions executed by that binary and analyze what is found:
+
+
+lets first just search for the ntdsutil string and see which logs have this name present:
+
+Fortantely we find a single command present usig this dll:
+
+<img width="1905" height="493" alt="image" src="https://github.com/user-attachments/assets/b24fef0a-f23a-48ae-8a60-5f7316c842fc" />
+
+While we do not have the password or the archiving of the database yet, we do have the location to which he copied the AD database and what he copied it as: 
+
+**C:\Windows\Temp\tmp\temp.dit**
+
+We should use this in our next search to see his next actions:
+
+Lets set a filter for the file temp.dit:
+
+<img width="1902" height="605" alt="image" src="https://github.com/user-attachments/assets/4881ec34-2dcc-4aa5-83fd-e64b23d4c725" />
+
+
+The first event we find we see the archiving action taking place and can see the password he has chosen:
+
+<img width="1627" height="111" alt="image" src="https://github.com/user-attachments/assets/120792e8-037e-46da-b237-d43fdb5a1331" />
+
+
+
+lets put this in and check if we are correct (Success)
+
+
+
 
 
 
