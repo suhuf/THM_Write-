@@ -14,6 +14,16 @@ breached and exploited multiple Western government instituions.
 Today we are going to be doing the Splunk focused Tryhackme Challenge that uses the TTPs and the IOCs consistent with this APT based on logs of actual compromises:
 
 
-Firstly we access the Splunk instance
+Firstly we access the Splunk instance, I will not be going over the VPN set up process here as the machine was unaccesible except via Attackbox and etc. When reviewing for this writeup (Annoying).
+
+The Spunk instance will be your personal target machine's IP and on port 8000.
+
+
+Select search and reporting to access the logs: <img width="1883" height="824" alt="image" src="https://github.com/user-attachments/assets/41ab1db6-e771-4563-ba38-45c318db4165" />
+
+
+
+
+
 
 
