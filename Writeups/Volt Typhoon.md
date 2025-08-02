@@ -93,12 +93,24 @@ Ignoring what we already have checked, adss, we see there are a lot of logs with
 
 <img width="1869" height="661" alt="image" src="https://github.com/user-attachments/assets/47997169-e03a-422b-bf3c-80e2af79944a" />
 
-We see here the attacker is enumerating the environment via the compromised DEAN account there is valuable info here but there is not the info we need for this question, lets try the terms server01 and server02
+We see here the attacker is enumerating the environment via the compromised DEAN account, we should note that. Amongst these events there is valuable info but not what we need for this question, lets try the terms server01 and server02
 
 
+<img width="1824" height="708" alt="image" src="https://github.com/user-attachments/assets/6be37dfc-b479-4619-8c09-b7e648f2cf62" />
+
+Fortanetly, despite our filter having a wide net we only get 11 logs, we can look through these for relevant information
+
+<img width="1644" height="444" alt="image" src="https://github.com/user-attachments/assets/7cc24a8e-095b-47e8-8fdb-71664a653d4f" />
 
 
+When searching we find a single command executed via wmic, this command contains the two servers, enumeration of their drives, and is running under the comprimised DEAN account, we should check this and see if this is the answer. (Successs).
 
+
+Now the next question:
+
+**The attacker uses ntdsutil to create a copy of the AD database. After moving the file to a web server, the attacker compresses the database. What password does the attacker set on the archive?**
+
+As expected our APT is very attached to using Living Off the Land binary techniques, since we know what binary is used in this case we should set a filter for actions executed by that binary and analyze what is found
 
 
 
