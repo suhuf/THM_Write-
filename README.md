@@ -6,7 +6,7 @@
 **List of completed Challenge rooms I plan to document:**
 
 
-☐ Volt Typhoon (APT)
+☐ Volt Typhoon (APT)  [60% Done]
 
 ☐ Conti (APT)
 
