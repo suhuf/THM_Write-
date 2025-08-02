@@ -14,6 +14,6 @@ breached and exploited multiple Western government instituions.
 Today we are going to be doing the Splunk focused Tryhackme Challenge that uses the TTPs and the IOCs consistent with this APT based on logs of actual compromises:
 
 
-Firstly we access the splunk instance
+Firstly we access the Splunk instance
 
 
