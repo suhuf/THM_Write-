@@ -1,6 +1,6 @@
 
+## Volt Typhoon APT TryHackMe Write-Up
 
-**Hello!**
 
 This is a write-up of the Volt Typhoon challenge on Tryhackme. **Volt Typhoon** is an infamous APT assumed to be of Chinese origin that focus on espionage, data theft, and credential exfiltration.
 
@@ -13,7 +13,7 @@ breached and exploited multiple Western government instituions.
 
 Today we are going to be doing the Splunk focused Tryhackme Challenge that uses the TTPs and the IOCs consistent with this APT based on logs of actual compromises:
 
-**Basic Intro:**
+## **Basic Intro:**
 
 
 
@@ -42,7 +42,7 @@ After enabling the search with the parameters we find there are 2k logs, the log
 
 
 
-**Initial Access**
+## **Initial Access**
 
 We are asked to find how the threat actor gained a foothold; 
 
@@ -78,7 +78,7 @@ When we check this we see this new user was created at the same hour that Dean's
 
 
 
-**Execution:**
+## **Execution:**
 
 Now that we have passed the Initial Accces/"Foothold" stage we now are going to begin getting into the more detailed sections, the first of them being execution. We know that Volt Typhoon is a very stealthy APT. They nearly always will be using a Windows Binary in order to execute code and evade detection which is important to note when hunting for their IOCs. Here are our first questions:
 
@@ -141,7 +141,7 @@ Let's put this in and check if we are correct (Success).
 
 
 
-**Persistence**
+## **Persistence**
 
 Here we are going to analyze how Volt Typhoon likes to make a foothold, we are given a hint that this is going to be a base64 encoded webshell:
 
@@ -175,7 +175,7 @@ We can decode this payload either in terminal or by using any online base64 deco
 After decoding we can clearly see that it is an asp webshell. Infact it actually literally has the word webshell in its title. We know this was put into the **ntuser.ini** file in the **C:\Windows\Temp\** directory so we should provide the C:\Windows\Temp\ directory as our answer (Success).
 
 
-**Defense Evasion:**
+## **Defense Evasion:**
 
 Our next section of analysis of this APT are their TTPs for **Defense Evasion** we already know they use LOLBins for execution to evade defenses and Base64 encoded commands, however what other tactics do they use in engagement?
 
@@ -280,7 +280,7 @@ We can clearly see they are trying to find the keyword Virtual to assess if they
 
 
 
-**Credential Access**
+## **Credential Access**
 
 <img width="1342" height="455" alt="image" src="https://github.com/user-attachments/assets/f4bda555-e186-4acd-b203-0ecff52a4380" />
 
@@ -336,7 +336,7 @@ And we have found the malicous command and the Invoke Web Request cmdlet we were
 
 
 
-**Discovery and Lateral Movement:**
+## **Discovery and Lateral Movement:**
 
 <img width="1271" height="559" alt="image" src="https://github.com/user-attachments/assets/92a233e9-8c8d-48b1-943a-a9ae8f4b9b5f" />
 
