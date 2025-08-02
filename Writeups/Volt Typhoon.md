@@ -2,7 +2,7 @@
 
 **Hello!**
 
-This is a write-up of the Volt Typhoon challenge on Tryhackme. **Volt Typhoon** is an infamous APT assumed to be of Chinese Origin that focus on espionage, data theft, and credential exfiltration.
+This is a write-up of the Volt Typhoon challenge on Tryhackme. **Volt Typhoon** is an infamous APT assumed to be of Chinese origin that focus on espionage, data theft, and credential exfiltration.
 
 It has different names from multiple different threat analysis research groups and is very stealthy in their actions post foothold, using nearly entirely only LOLBins (Living off The Land binaries), such as  wmic, ntdsutil, and netsh.
 
