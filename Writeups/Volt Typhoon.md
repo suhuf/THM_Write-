@@ -136,7 +136,51 @@ The first event we find we see the archiving action taking place and can see the
 
 
 
-lets put this in and check if we are correct (Success)
+Let's put this in and check if we are correct (Success).
+
+
+
+
+**Persistence**
+
+Here we are going to analyze how Volt Typhoon likes to make a foothold, we are given a hint that this is going to be a base64 encoded webshell:
+
+
+<img width="1303" height="322" alt="image" src="https://github.com/user-attachments/assets/d3ec5582-7117-4a68-bfdf-b62c832ce812" />
+
+Now just from instincts from doing boxes myself, I autoamtically default that the webshell is going to be present in a temp directory. This is common procedure of threat actors and in pentests as it is not a strictly monitored directory. Lets filter for the temp directory:
+
+<img width="1911" height="699" alt="image" src="https://github.com/user-attachments/assets/54068547-96a6-4fe9-9b97-c54301f84b78" />
+
+There are 32 logs, a bit too much for our liking so we should filter it further. We can check the CommandLine field for anything interesting. 
+
+<img width="1753" height="644" alt="image" src="https://github.com/user-attachments/assets/bee76fca-e124-442e-ba19-f90bebd09866" />
+
+
+We see that echo is used in the command line once, echo is commonly used while encoding base64 payloads and it only be using once is a reason to investigate, lets set that as our command line filter with the temp string:
+
+
+<img width="1900" height="717" alt="image" src="https://github.com/user-attachments/assets/f5d8ac92-6c9a-450b-a2b1-a239a1c6b934" />
+
+
+Immediately we find only one event and can already tell this is most likely malicious, Powershell is running an obfuscated base64 command that is specifically being piped into **ntuser.ini**. This is another example of Volt Typhoon using the LOLBIN technique:
+
+
+We can decode this payload either in terminal or by using any online base64 decoder by copying and pasting the payload.
+
+<img width="1282" height="929" alt="image" src="https://github.com/user-attachments/assets/d6b0d8a9-0662-4096-82c3-e6dcb1af3ca5" />
+
+
+
+After decoding we can clearly see that it is an asp webshell. Infact it actually literally has the word webshell in its title. We know this was put into the **ntuser.ini** file in the **C:\Windows\Temp\** directory so we should provide the C:\Windows\Temp\ directory as our answer (Success).
+
+
+**Defense Evasion:**
+
+
+
+
+
 
 
 
