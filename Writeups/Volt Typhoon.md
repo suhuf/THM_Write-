@@ -1,4 +1,4 @@
-
+<img width="1194" height="777" alt="image" src="https://github.com/user-attachments/assets/75465e60-45c0-47de-87ae-997aaa2f1fce" />
 
 **Hello!**
 
@@ -176,6 +176,122 @@ After decoding we can clearly see that it is an asp webshell. Infact it actually
 
 
 **Defense Evasion:**
+
+Our next section of analysis of this APT are their TTPs for **Defense Evasion** we already know they use LOLBins for execution to evade defenses and Base64 encoded commands, however what other tactics do they use in engagement?
+
+
+<img width="1282" height="541" alt="image" src="https://github.com/user-attachments/assets/5a096f28-94e4-41f0-94ad-0ed94583e1e0" />
+
+**In an attempt to begin covering their tracks, the attackers remove evidence of the compromise. They first start by wiping RDP records. What PowerShell cmdlet does the attacker use to remove the “Most Recently Used” record?**
+
+Here we are asked to find a powershell script that attempts to remove RDP logs, we can set our source or source type to only the PowerShell logs source to narrow the information:
+
+
+<img width="1757" height="888" alt="image" src="https://github.com/user-attachments/assets/f9554a23-e936-4fe6-8c02-18778466576f" />
+
+
+We still have 438 logs which is a problem, lets search for any logs with the string RDP:
+
+<img width="681" height="195" alt="image" src="https://github.com/user-attachments/assets/030efd1a-e6b0-4090-9a6d-d25661e7ac4f" />
+
+No results found. Lets check what relevant CMDLETs are found in the powershell logs:  
+
+<img width="1684" height="851" alt="image" src="https://github.com/user-attachments/assets/083bebbb-df43-4816-9cc3-f8fbe7dac154" />
+
+
+Remove-Item seems like it could be relevant for our search, lets select it as a filter and see what comes up:
+
+
+<img width="1641" height="291" alt="image" src="https://github.com/user-attachments/assets/1daaa847-1508-40b4-aa3a-168de202c62c" />
+
+
+7 events are available and within these Seven we find these:
+
+<img width="1390" height="441" alt="image" src="https://github.com/user-attachments/assets/414ee16b-fafa-49fa-9f82-02b893afe9a6" />
+
+<img width="1453" height="396" alt="image" src="https://github.com/user-attachments/assets/4aed7a4d-af0f-4dcf-a37d-b5cddb5a6d6c" />
+
+This is valuable info but not exactly what we needed, we are not seeing any RDP logs specifically being removed here lets look at any other cmdlets that can help:
+
+
+One of the CMDLET options available is "Remove-itemProperty", lets see what comes up when we filter for that instead:
+
+<img width="1194" height="777" alt="image" src="https://github.com/user-attachments/assets/25006747-8011-4d31-9a81-da8a22388741" />
+
+We can see that they are removing things according to a specific registry path but we are unaware of the registry path, lets check the hint given for the question.
+
+the hint given is  "T1070.007"  We should search this TTP id in mitre attack and see what comes up:
+
+<img width="1792" height="628" alt="image" src="https://github.com/user-attachments/assets/b26aa456-5683-4f04-9c83-68efa3f3a1d9" />
+
+Ok now we have a bit of a better lead, lets search for these paths:
+
+C:\Users\%username%\AppData\Local\Microsoft\TerminalServer Client\Cache\
+
+C:\Users\%username%\Documents\Default.rdp
+
+To make this quicker you can also just pick a string from the path and see what is present, lets choose "Default"
+
+
+
+<img width="1309" height="836" alt="image" src="https://github.com/user-attachments/assets/dfe120d4-b199-41e7-b96e-f81e81da608f" />
+
+
+Now we found what we were looking for, it is the exact log we were looking for earlier, they however have saved the path as the variable "Registry Path" in order to evade capture, this means the Remove-item logs we found earlier were actually correct, we can sort for logs around this time period to add more evidence that this was their tactic for deleting logs:
+
+Click on time on one of the logs and select 5 minutes and click apply and remove the default string filter:
+
+<img width="431" height="212" alt="image" src="https://github.com/user-attachments/assets/eebd9ba6-6a2e-47f7-a937-d08eb82c24c8" />
+
+
+<img width="1363" height="882" alt="image" src="https://github.com/user-attachments/assets/5cfc3a75-ba72-4e9b-a41f-3caaa902ee41" />
+
+
+we find 2 events and they are almost exactly what we are looking for, if you check the other event with the same time you will find the Remove-ItemProperty cmdlet used to remove the log. Lets put Remove-Itemproperty as our answer and continue (it works).
+
+
+
+**The APT continues to cover their tracks by renaming and changing the extension of the previously created archive. What is the file name (with extension) created by the attackers?**
+
+We have actually already uncovered the archive name from before, so it should not be easy finding out what they renamed it to, If you remember from earlier the archive was named first cisco-up.7z and then piped into temp.dit, we just need to search for the original name cisco-up and see what they renamed the file too:
+
+<img width="1896" height="652" alt="image" src="https://github.com/user-attachments/assets/1cbf5775-feb0-470a-b734-ab7f25ea44d8" />
+
+A stealthy psuedo **.gif** file named **cl64.gif**. Lets pass this as our answer and check (Success).
+
+
+**Under what regedit path does the attacker check for evidence of a virtualized environment?**
+
+This action may be to check if they are in a honeypot or the like.
+
+
+After searching udner the list of executed Commandline commands; ie the command line field for the powershell log one command sticks out:
+
+_CommandLine="Get-ItemProperty -Path \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\""_
+
+Through checking mitreattack and the TTPs of the APT, we can see that this is sometimes queried in order to check if the environment is a virtual machine, Lets select this command and see what events are present:
+
+<img width="1884" height="710" alt="image" src="https://github.com/user-attachments/assets/05eb789a-e974-44b2-a08f-122049088139" />
+
+
+We can clearly see they are trying to find the keyword Virtual to assess if they are in a virtual machine, lets put this regedit path as our answer: 
+
+**HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control**
+
+
+
+**Credential Access**
+
+<img width="1342" height="455" alt="image" src="https://github.com/user-attachments/assets/f4bda555-e186-4acd-b203-0ecff52a4380" />
+
+
+
+
+
+
+
+
+
 
 
 
