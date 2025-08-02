@@ -18,7 +18,7 @@ Today we are going to be doing the Splunk focused Tryhackme Challenge that uses 
 
 
 
-Firstly we access the Splunk instance, I will not be going over the VPN set up process here as the machine was unaccesible except via Attackbox and etc. When reviewing for this writeup (Annoying).
+Firstly we access the Splunk instance, I will not be going over the VPN set up process here as the machine was unaccesible except via Attackbox and etc. When reviewing for this writeup.
 
 The Spunk instance will be your personal target machine's IP and on port 8000.
 
