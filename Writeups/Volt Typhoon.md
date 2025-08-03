@@ -381,6 +381,92 @@ All of this being done through a combination of **certutil** and **Powershell cm
 
 ## **Collection**
 
+<img width="1536" height="352" alt="image" src="https://github.com/user-attachments/assets/21211aab-a439-45c3-839f-68353859b9c9" />
+
+
+Here we can limit our log source to the PowerShell logs, we however are not given much information this time around comapred to the other questions. Lets check for powershell commands in the commandline field that have to do with copy:
+
+"Copy-Item" Seems like a good fit:
+
+<img width="1792" height="804" alt="image" src="https://github.com/user-attachments/assets/dcc2d167-60be-4a04-bf27-b5fd9aa16b58" />
+
+We get 11 logs with one of them being the logs of webshell copy we caught earlier
+
+Checking the events we see they are collecting Browser backups
+
+
+<img width="1091" height="44" alt="image" src="https://github.com/user-attachments/assets/4e06164d-2669-4fab-bf93-93aac8df546f" />
+
+
+and .csv files that are in a directory called "FinanceBackup" 
+
+
+<img width="1620" height="727" alt="image" src="https://github.com/user-attachments/assets/e8805fc6-47ad-434e-852f-71cd57bee9ea" />
+
+
+We find a total of 3 different .csv files copied from that directory and browser information on multiple major web browsers.
+
+We should put the csv file names as our answer: **2022.csv 2023.csv 2024.csv**
+
+
+## **C2 & Cleanup**
+
+We can see now that Volt Typhoon as acted on their major objectives, now lets see what they perform in their conclusion and clean-up phase:
+
+<img width="706" height="628" alt="image" src="https://github.com/user-attachments/assets/cc3d72fd-bd34-447b-be08-bd9de27f0b1b" />
+
+Lets reset our logs to default and see what fields can help us.
+
+<img width="1828" height="284" alt="image" src="https://github.com/user-attachments/assets/c2d93f4d-ca5f-45e4-ac16-2d7a0126295a" />
+
+
+Two fields seem very pertinent for this questions, Connect Address and Connect port. Both only contain one value, lets apply this as a filter and see what events are present.
+
+
+<img width="1619" height="130" alt="image" src="https://github.com/user-attachments/assets/baaadaa7-cec5-4f0f-a4cb-3ee6af061295" />
+
+
+This is a priveldged command that is opening up the victim machine to the remote ip 10.2.30.1 and port 8443 for future c2 communications, lets provide this as our answer:  **10.2.30.1 8443**
+
+**To conceal their activities, what are the four types of event logs the attacker clears on the compromised system?**
+
+Earlier, we noticed the attacker was clearing multiple types of logs via powershell CMDLET, lets search for that cmdlet again or a similar one and list out the logs removed this time around:
+
+<img width="1754" height="197" alt="image" src="https://github.com/user-attachments/assets/9ee06775-41b7-4bfd-93a2-aa022860a2a2" />
+
+We check this but don't find anything, lets check the hint for a bit of a lead
+
+<img width="368" height="120" alt="image" src="https://github.com/user-attachments/assets/1c4734da-a6bd-44a5-9a86-165623aa988e" />
+
+This is vague, but in the last question they were using wevtutil for logs, lets check for this and see what comes up:
+
+
+<img width="1877" height="719" alt="image" src="https://github.com/user-attachments/assets/10ef70d8-8244-4053-b0c1-a6a4ca03275b" />
+
+
+This is suspicious, and after checking this command flag **cl** we find that this is a command to clear all logs for the parameters specificed on the system. Infact this technique is so common there is even a Mitre writeup on using this specifically: https://attack.mitre.org/techniques/T1070/001/
+
+So for our last answer we should provide these log sources:
+
+**Application Security Setup System**
+
+And with that we have completed our analysis of Volt Typhoon.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
