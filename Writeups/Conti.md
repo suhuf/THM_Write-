@@ -1,5 +1,6 @@
+## **Conti Ransomware: TryHackMe Room Write-Up**
 
-
+**Basic Introduction:**
 
 This is a write-up of the **Conti** challenge on Tryhackme. **Conti** is an infamous commercialized black hat ransomware most likely of Russian origin, it is sold by RAAS (Ransomware As a service) providers and is/was one of the most popular from 2019 - 2022.
 
