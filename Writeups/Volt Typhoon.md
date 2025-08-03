@@ -340,6 +340,54 @@ And we have found the malicous command and the Invoke Web Request cmdlet we were
 
 <img width="1271" height="559" alt="image" src="https://github.com/user-attachments/assets/92a233e9-8c8d-48b1-943a-a9ae8f4b9b5f" />
 
+**The attacker uses wevtutil, a log retrieval tool, to enumerate Windows logs. What event IDs does the attacker search for?
+Answer Format: Increasing order separated by a space.**
+
+This is another example of Volt Typhoon using the Living off the Land Technique. we can reset our filters and search for the string **wevtutil**:
+
+
+<img width="1720" height="703" alt="image" src="https://github.com/user-attachments/assets/ee5edcf1-0907-4db3-8aa2-1480bd9c51ed" />
+
+We have 12 events.
+
+When we check the 12 events we see these 3 EventIDs being queried via wevtutil:
+
+<img width="1577" height="488" alt="image" src="https://github.com/user-attachments/assets/db88f18f-faf4-4c03-8e4f-f6aa572037c1" />
+
+<img width="1536" height="252" alt="image" src="https://github.com/user-attachments/assets/4f84141e-7046-492c-b344-549285951efe" />
+
+**4624, 4625, and 4769** this is our answer.
+
+**Moving laterally to server-02, the attacker copies over the original web shell. What is the name of the new web shell that was created?**
+
+Being familiar with Webshells I already knew that it was most likely going to be a .asp or .aspx file. We can search for this string extension in the logs and narrow our search down.
+
+<img width="1867" height="713" alt="image" src="https://github.com/user-attachments/assets/163aae1f-c220-4cdd-a4a7-579dda89b07e" />
+
+We find some critical information here:
+
+First, the malicious encoded webshell file in the Temp directory was accessed, it was first decoded and then put into a file called iisstart.aspx.:
+
+**CommandLine=certutil -decode C:\Windows\Temp\ntuser.ini C:\Windows\Temp\iisstart.aspx**
+
+Then, on the 29th the new webshell file was moved to server02's public facing webserver as a new name: **"AuditReport.jspx"**
+
+**CommandLine=Copy-Item -Path "C:\Windows\Temp\iisstart.aspx" -Destination "\\server-02\C$\inetpub\wwwroot\AuditReport.jspx**
+
+All of this being done through a combination of **certutil** and **Powershell cmdlets**. An example of Volt Typhoon's pattern**.
+
+**AuditReport.jspx** Should be our answer in this case.
+
+
+## **Collection**
+
+
+
+
+
+
+
+
 
 
 
