@@ -39,21 +39,115 @@ We go to search and reporting, set the time period to all time and set the index
 We have nearly 30k events logged; Meaning we are going to have to be smarter about our filtering for this exercise than we were with Volt Typhoon.
 
 
-When it comes to analyzing malware, an easy way to spot the source process is checking for process names, finding a strange process name/directory can be a good starting point to finding the malware's tracks. Let's select the processname field and look for what is present:
+Lets also check our hint for our question:
+
+<img width="427" height="178" alt="image" src="https://github.com/user-attachments/assets/fbbb7e56-b4bc-4cdb-8882-92b3c9584515" />
 
 
-<img width="852" height="587" alt="image" src="https://github.com/user-attachments/assets/9e7853c9-52a0-445f-a307-0f95fb8e9ac0" />
+When it comes to analyzing malware, an easy way to spot the source process is checking for process that are connected to .Exes. lets quikcly check how many logs we can find for commandline that have the .exe extension:
+
+<img width="1883" height="466" alt="image" src="https://github.com/user-attachments/assets/a7149843-c144-45a5-938b-6137eccbb8ac" />
 
 
-Choose top values, set the top limit to 0 and then choose statistics
+
+We filter the command line with the * wild card before .exe, meaning we are inclduing any argument and path that ends with .exe, we end up with 16 logs. Let's check them:
 
 
-<img width="524" height="137" alt="image" src="https://github.com/user-attachments/assets/af66f79f-1975-48d7-a2b5-1277bf6d027c" />
+Here we find the supposed cmd.exe windows binary in an abnormal area 
+
+<img width="1560" height="617" alt="image" src="https://github.com/user-attachments/assets/8b69d119-fca4-4fbf-9033-e7305cfa55ce" />
+
+Despite finding this info, we don't have anything just yet that solidifies with certantity this is from the malware. However, we can see what processes and actions this process is creating to determine if it is the malware or not. 
+
+Let's grab the processes ID first: 
+
+[Insert Image]
+
+We find that it is **15540** great, lets apply a filter for all actions that are being spawned from this process ID:
 
 
-We also can check our provided hint for more info:
+<img width="1455" height="150" alt="image" src="https://github.com/user-attachments/assets/e1672699-c951-4ee4-9885-9778e8d0b70e" />
 
-<img width="448" height="119" alt="image" src="https://github.com/user-attachments/assets/4d2242f0-aaa1-45f8-a126-28e1f5fb139f" />
+We see 26 logs and we see that this process produces the ransomware note we saw earlier:
+
+
+<img width="1641" height="681" alt="image" src="https://github.com/user-attachments/assets/0084c9e3-b298-415b-a814-fa25f6d6cdcb" />
+
+We can see that the source image is the CMD.exe binary in the Administrator's documents folder. 
+
+
+Looking further through the logs we see that it is spawning child processes as well when it is run:
+
+<img width="1503" height="673" alt="image" src="https://github.com/user-attachments/assets/c28d6516-97d5-4452-9a1a-99db57a080c4" />
+
+This means there is a decent chance this is the source binary that starts the malware detonation and spawns multiple different processes, we should take note of this process ID **15540** and set it as a Parent Process filter later.
+
+As for this question, we should provide **C:\Users\Administrator\Documents\cmd.exe** as our answer
+
+**What is the Sysmon event ID for the related file creation event?** 
+
+We can check the logged event from earlier to grab the Sysmon event ID:
+
+<img width="1508" height="549" alt="image" src="https://github.com/user-attachments/assets/e7b118f2-125d-4766-9023-814d17bd0cb9" />
+
+We can see that it is **11**, we should provide that.
+
+
+**Can you find the MD5 hash of the ransomware?**
+
+We find that with our filter inplace there is still a field available called **"hashes"**
+
+<img width="1771" height="664" alt="image" src="https://github.com/user-attachments/assets/05758a54-c23e-43cc-b8a2-6c1bed5c9ba7" />
+
+lets select this and see what data we can find:
+
+
+<img width="1601" height="217" alt="image" src="https://github.com/user-attachments/assets/ed482e05-1c74-4d36-99cf-4972a155956c" />
+
+We are able to easily locate the MD5 hash of the ransomware and know it is the right cmd.exe binary due to the process ID filter we applied earlier.
+
+We should provide this as our answer: **290C7DFB01E50CEA9E19DA81A781AF2C**
+
+Let's also check virus total just to see if this is truely malicious or not:
+
+
+<img width="1653" height="933" alt="image" src="https://github.com/user-attachments/assets/b5984185-1367-4c9f-ad82-90605167de97" />
+
+Link: https://www.virustotal.com/gui/file/53b1c1b2f41a7fc300e97d036e57539453ff82001dd3f6abf07f4896b1f9ca22
+
+(I think it might be malicious)
+
+
+**What file was saved to multiple folder locations?**
+
+We already checked the logs for this and saw that the **readme.txt** ransom note was being spammed to multiple different directory locations with the previously mentioned process ID, we should put **readme.txt** as our answer.
+
+
+
+## **Persistence**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
