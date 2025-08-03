@@ -8,7 +8,7 @@
 
 ✔️ Volt Typhoon (APT)      (Complete)
 
-☐ Conti (APT)
+☐ Conti (APT) (5%)
 
 ☐ REvil Corp (APT, Forensics focused using Redline Toolset)
 
