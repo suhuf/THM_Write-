@@ -61,7 +61,8 @@ Despite finding this info, we don't have anything just yet that solidifies with 
 
 Let's grab the processes ID first: 
 
-[Insert Image]
+<img width="1495" height="532" alt="image" src="https://github.com/user-attachments/assets/fd523c7d-ca23-440a-945a-bf9f45c9276c" />
+
 
 We find that it is **15540** great, lets apply a filter for all actions that are being spawned from this process ID:
 
@@ -125,6 +126,94 @@ We already checked the logs for this and saw that the **readme.txt** ransom note
 
 
 ## **Persistence**
+
+
+**What was the command the attacker used to add a new user to the compromised system?**
+
+Here we can filter we can filter the logs to only include event ID for a new user getting created and try and find a lead, After doing some research we can find that the event ID **'4720'** corresponds with the event of a new user being added. Let's apply this filter:
+
+<img width="1776" height="830" alt="image" src="https://github.com/user-attachments/assets/b5a402b1-287d-4536-8d6e-1ac4616fce71" />
+
+We see in the first log that a user named "securityninja" is created, this is a possible lead we can use to find the original command.
+
+
+Let's look for all events that are within a 5 second range of this event and filter for this string "security ninja"
+
+
+<img width="1906" height="317" alt="image" src="https://github.com/user-attachments/assets/c53850a0-feee-4233-9c94-ba3172fdd2c3" />
+
+We find 10 events we can sort through and one is the target:
+
+<img width="1697" height="695" alt="image" src="https://github.com/user-attachments/assets/37ec0958-fdf1-4794-8b79-8d7cc5d3bb7c" />
+
+We should provide: net user /add securityninja hardToHack123$ as our answer here
+
+
+**The attacker migrated the process for better persistence. What is the migrated process image (executable), and what is the original process image (executable) when the attacker got on the system?**
+
+This is a bit of a trickier one, lets check for events that match making a remote thread, according to some research and our provided hint, the Event code 8 corresponds to remote threads being created with sysmon. Let's apply this filter and see what we **find
+
+
+**index="main" EventCode=8**
+
+<img width="1639" height="601" alt="image" src="https://github.com/user-attachments/assets/6d10c9b2-af1a-4b89-b724-93fcf3d8cb24" />
+
+The earlier event shows the source image and the respective remote thread being created, A Powershell process is being migrated to an .exe named unsecapp.exe
+
+we also see in the same logs that this exe is accessing lsass.exe, LSASS is used by attackers to dump hashes and credentials from windows systems:
+
+<img width="1233" height="590" alt="image" src="https://github.com/user-attachments/assets/a5a817c9-a834-4ae9-8dab-c26f1bddd93a" />
+
+
+We can tell we are now moving into the Final phases of the attack chain.
+
+With this we can answer two questions: 
+
+**The attacker migrated the process for better persistence. What is the migrated process image (executable), and what is the original process image (executable) when the attacker got on the system?**
+
+Our answer should be: **C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe,C:\Windows\System32\wbem\unsecapp.exe**
+
+**The attacker also retrieved the system hashes. What is the process image used for getting the system hashes?**
+
+And also: **C:\Windows\System32\lsass.exe**
+
+
+**What is the web shell the exploit deployed to the system?**
+
+As the same with Volt Typhoon, since this is explicitdely a webshell we should be looking for specific extensions; examples of common extensions for webshells are: **.asp .aspx .php**
+
+Let's search for **.aspx** looking for a webshell
+
+
+<img width="1888" height="802" alt="image" src="https://github.com/user-attachments/assets/6fb432c2-471c-417a-afcb-fe43a1069e5b" />
+
+
+This time there are a lot of logs, however there is 1 event that contains .aspx in the command line field, lets apply that field as a filter and see what it is:
+
+<img width="1651" height="711" alt="image" src="https://github.com/user-attachments/assets/c2e9593b-b727-48fc-be4c-3064f7d431a2" />
+
+
+We have found a POST request that is putting a webshell named **i3gfPctK1c2x.aspx** into the auth directory of the webserver, we should provide the full command:
+
+**attrib.exe  -r \\\\win-aoqkg2as2q7.bellybear.local\C$\Program Files\Microsoft\Exchange Server\V15\FrontEnd\HttpProxy\owa\auth\i3gfPctK1c2x.aspx** As our answer.
+
+
+**What three CVEs did this exploit leverage? Provide the answer in ascending order.**
+
+This question was extremely problematic. Apparently, this question was based on a specific article that was made back in 2019 regarding a specific incident. Due to numerous other more popular incidents occuring exploiting IIS in similar ways the exact 3 CVEs requested were nearly impossible to locate. This challenge is 1.3k Days old as of writing so as a result the search results they expect you to get are severely outdated.
+
+
+To save time and rest, the three CVEs they are referring too are these:
+
+**CVE-2018-13374, CVE-2018-13379, CVE-2020-0796** In that order.
+
+
+And with that we have completed our SIEM (Splunk) Analysis of Conti.
+
+
+
+
+
 
 
 
