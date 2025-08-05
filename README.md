@@ -12,6 +12,8 @@
 
 ☐ REvil Corp (APT, Forensics focused using Redline Toolset)
 
+☐ ItsyBitsy (ELK, Elastic Kibana)
+
 ☐ Warzone 1 (PCAP/Brim)
 
 
