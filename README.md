@@ -8,7 +8,7 @@
 
 ✔️ [Volt Typhoon (APT)](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Volt%20Typhoon.md)      (Complete)
 
-✔️ [Conti (APT, Ransomware)  ]([url](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Conti.md)     (Complete)
+✔️ [Conti (APT, Ransomware)](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Conti.md)     (Complete)
 
 ☐ REvil Corp (APT, Forensics focused using Redline Toolset)
 
