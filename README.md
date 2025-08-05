@@ -1,6 +1,6 @@
 
 
-**Collect of writeups for challenge rooms I have completed or very interesting walkthrough rooms on Try Hack Me.**
+**Collect of writeups for challenge rooms I have completed or very interesting walkthrough rooms on TryHackMe.**
 
 
 **List of completed Challenge rooms I plan to document:**
