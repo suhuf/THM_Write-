@@ -6,9 +6,9 @@
 **List of completed Challenge rooms I plan to document:**
 
 
-✔️ [Volt Typhoon (APT)](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Volt%20Typhoon.md)      (Complete)
+✔️ [Volt Typhoon](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Volt%20Typhoon.md) (APT)      (Complete)
 
-✔️ [Conti (APT, Ransomware)](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Conti.md)     (Complete)
+✔️ [Conti](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Conti.md) (APT, Ransomware)     (Complete)
 
 ☐ REvil Corp (APT, Forensics focused using Redline Toolset)
 
