@@ -152,6 +152,24 @@ Ok, so now we know we are specifically only supposed to be looking for HTTPS tra
 
 There is a total of over 10k packets, even when filtering for TLS, this is due to numerous reasons such as Microsoft telemetry being sent via the HTTPS protocol. 
 
+Looking back at the hint, we find that they also provided a time frame, lets set up a filter for this time frame:
+
+((tls) && (ip.src == 10.9.23.102) )&& (frame.time_utc >= "2021-09-24 16:45:11.00Z") && (frame.time_utc <= "2021-09-24 16:45:31.0Z") 
+
+
+Now let's see what is present when we apply this filter:
+
+<img width="1845" height="549" alt="image" src="https://github.com/user-attachments/assets/ec978f63-2025-459a-a4a6-2669d0c8c464" />
+
+26 packets, since these are encrypted we have no clear way of telling what is going on in the conversation. However the wording of the question let's us know that they are indeed doing a download of some sort during this time period. Filtering out that which is coming from trysted domains such as **windows.com** and **microsoft** we find that their are 3 suspicious domains that our vitcim is communicating with:
+
+<img width="1821" height="214" alt="image" src="https://github.com/user-attachments/assets/4a62dc01-aefe-4054-bfa0-075860447ab7" />
+
+So our answers for this question are:
+**finejewels[.]com[.]au, thietbiagt[.]com, new[.]americold[.]com** In that order **Defanged**
+
+
+
 
 ## Initial Compromise
 
