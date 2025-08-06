@@ -138,6 +138,9 @@ We can quickly grab the php version too while we are still on this steam's info 
 Our answer to that question should be: **PHP/7.2.34**
 
 
+**Malicious files were downloaded to the victim host from multiple domains. What were the three domains involved with this activity?**
+
+
 
 
 
