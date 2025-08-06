@@ -80,6 +80,64 @@ our answer should be this (They are looking for UTC time.):
 Sep 24, 2021 16:44:38.990412000 -> **Sep 24, 2021 16:44:38**
 
 
+**What was the domain hosting the malicious zip file?**
+
+To check this, we can stay on our current highlighted packet, we merely just need to open the HTTP section of the packet which is found at the bottom:
+
+<img width="957" height="769" alt="image" src="https://github.com/user-attachments/assets/f52bbfcf-84af-46bb-b3ea-11d6ba360a62" />
+
+And take the domain found in the **Full Request URI**: hxxp[:]//attirenepal[.]com/incidunt-consequatur/documents[.]zip
+
+The answer is attirenepal[.]com (Defanged).
+
+
+
+**Without downloading the file, what is the name of the file in the zip file?**
+
+Here we are going to be interacting with the sample itself, we are going to export the downloaded malicous zip artifact and then unzip it to see what it contains, it goes without saying this should be done in a safe environment.
+
+To do this in Wireshark, go to **File** -> **Export Objects** -> and Select **HTTP**
+
+<img width="586" height="576" alt="image" src="https://github.com/user-attachments/assets/26bcc09c-4adc-4274-bdc3-d59e0e37f179" />
+
+<img width="765" height="545" alt="image" src="https://github.com/user-attachments/assets/52a93934-8eba-4416-aa71-64d0034ec7ac" />
+
+Here we can see that the first object is the Malicious Zip file, but if this wasnt the case we could search for the .zip file extension and filter the results, select the file and choose save.
+
+Now let's see what this .zip file contains:
+
+<img width="600" height="498" alt="image" src="https://github.com/user-attachments/assets/0ab8cf67-5bcd-424f-8c81-fb1a668d488a" />
+
+We can see that it is an excel spreadsheet, meaning, this spreadsheet likely had a malicious macro that initiated the infection once run. This is a very common tactic bundled with Phishing attempts and if we desired we could also analyze the spread sheet for malicious macros via some static analysis tools.
+
+For this question however, our answer is **chart-1530076591.xls**
+
+**What is the name of the webserver of the malicious IP from which the zip file was downloaded?**
+
+Now we are getting a bit deeper into forensics and analyzing the tracks of the threat actor, we now should look at the full stream of communication with this IP and see what we can get in the request headers:
+
+
+To follow the full conversation that occurred with a specific IP/packet right click on that packet, click follow, and choose HTTP or TCP stream respectively. We are doing HTTP in this case: 
+
+<img width="777" height="446" alt="image" src="https://github.com/user-attachments/assets/ea67ac99-5433-4acb-96f7-c2ac623465d0" />
+
+<img width="1269" height="877" alt="image" src="https://github.com/user-attachments/assets/15ca1c40-541d-435f-8bd2-1bf39f33abfa" />
+
+Now we can see the entire conversation in a nice and readable format, we also can see the webserver that was used for the transfer in the headers:
+
+<img width="683" height="327" alt="image" src="https://github.com/user-attachments/assets/2333e488-fee8-49f6-9aca-2d8c2da26297" />
+
+Our answer for this question is **LiteSpeed.**
+
+**What is the version of the webserver from the previous question?**
+
+We can quickly grab the php version too while we are still on this steam's info pane:
+
+<img width="646" height="336" alt="image" src="https://github.com/user-attachments/assets/dce83064-425e-4829-a13d-adb9e3e22a08" />
+
+Our answer to that question should be: **PHP/7.2.34**
+
+
 
 
 
