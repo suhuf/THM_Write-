@@ -10,18 +10,15 @@
 
 ✔️ [Conti](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Conti.md) (APT, Ransomware)     (Complete)
 
+☐ Carnage (Pcap/Wireshark) (50% complete)
+
 ☐ REvil Corp (APT, Forensics focused using Redline Toolset)
 
 ☐ ItsyBitsy (ELK, Elastic Kibana)
 
 ☐ Warzone 1 (PCAP/Brim)
 
-
 ☐ Warzone 2 (PCAP/Brim)
-
-
-☐ Carnage (Pcap/Wireshark)
-
 
 ☐ Benign
 
