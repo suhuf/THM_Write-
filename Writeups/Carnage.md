@@ -140,9 +140,17 @@ Our answer to that question should be: **PHP/7.2.34**
 
 **Malicious files were downloaded to the victim host from multiple domains. What were the three domains involved with this activity?**
 
+This question took a lot of trial and error without checking the hint, I personally believe they should have included the fact that these requests are SSL (HTTPS) in the question itself rather than the hint. Let's check the hint quickly to save time:
 
+<img width="366" height="265" alt="image" src="https://github.com/user-attachments/assets/1eba4c5c-ecb5-43a4-a7af-d3c580af91fc" />
 
+Ok, so now we know we are specifically only supposed to be looking for HTTPS traffic. We can set that filter on wireshark:
 
+*Note that the filter for this is not _HTTPS_ on wireshark but _TLS_ for some reason.
+
+<img width="1567" height="478" alt="image" src="https://github.com/user-attachments/assets/333033e2-7c1f-4bc9-9801-663f6e1f8504" />
+
+There is a total of over 10k packets, even when filtering for TLS, this is due to numerous reasons such as Microsoft telemetry being sent via the HTTPS protocol. 
 
 
 ## Initial Compromise
