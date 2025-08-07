@@ -140,6 +140,19 @@ Our answer to that question should be: **PHP/7.2.34**
 
 **Malicious files were downloaded to the victim host from multiple domains. What were the three domains involved with this activity?**
 
+_*Sidetrack Note for this question and the following questions we are asked extensively about the domain names, you can add a custom collumn Like i did in my walkthrough like this: Choose a column you dont want, in my case it was size:
+
+Right click and select edit collumn -> then make the collumn tilte as server name and set the fields as:
+
+**tls.handshake.extensions_server_name**
+
+it should look like this_:
+
+<img width="1900" height="51" alt="image" src="https://github.com/user-attachments/assets/dc97f4d6-357e-464e-a859-64cf1268c40e" />
+
+_Then press Ok and you should be set 👍_ 
+
+
 This question took a lot of trial and error without checking the hint, I personally believe they should have included the fact that these requests are SSL (HTTPS) in the question itself rather than the hint. Let's check the hint quickly to save time:
 
 <img width="366" height="265" alt="image" src="https://github.com/user-attachments/assets/1eba4c5c-ecb5-43a4-a7af-d3c580af91fc" />
@@ -235,6 +248,113 @@ It is noted to be a C2 server, since the question is worded the way it is, we ca
 
 
 **What is the Host header for the first Cobalt Strike IP address from the previous question?**
+
+We can do this by highlighting the packet witht the IP **185[.]106[.]96[.]158** and going to follow -> HTTP stream like earlier:
+
+<img width="1250" height="447" alt="image" src="https://github.com/user-attachments/assets/014c0526-db9e-46d7-ab13-44fede8f9497" />
+
+We find the host is **ocsp[.]verisign[.]com**
+
+**What is the domain name for the first IP address of the Cobalt Strike server? You may use VirusTotal to confirm if it's the Cobalt Strike server (check the Community tab).**
+
+We can recheck the community tab entry for this IP:
+
+<img width="1434" height="267" alt="image" src="https://github.com/user-attachments/assets/008a9d2a-79f7-4bee-ab07-43782c135b9c" />
+
+Our answer is **survmeter[.]live**
+
+
+**What is the domain name of the second Cobalt Strike server IP?  You may use VirusTotal to confirm if it's the Cobalt Strike server (check the Community tab).**
+
+We already grabbed this earlier from WireShark, the answer was **securitybusinpuff[.]com**
+
+
+**What is the domain name of the post-infection traffic?**
+
+We can find this via looking at the packets after the request for the zip file (Filter as HTTP), we can check those packets and then choose follow HTTP stream for one of them:
+
+<img width="1257" height="524" alt="image" src="https://github.com/user-attachments/assets/3fd19757-9025-4423-a7ae-cec09b2b1b36" />
+
+We can quickly identify the domain name as **maldive[.]host**
+
+**What are the first eleven characters that the victim host sends out to the malicious domain involved in the post-infection traffic?** 
+
+We can go back to the **HTTP** filter and look for the first **POST** request:
+
+<img width="1729" height="86" alt="image" src="https://github.com/user-attachments/assets/4b9ca796-de1b-480c-8527-7c63f6cf105e" />
+
+Our answer is: **zLIisQRWZI9**
+
+**What was the length for the first packet sent out to the C2 server?**
+
+My collumns are currently changed, so we cannot see the size in the main view but we can find it in the lower left-hand pane:
+
+<img width="973" height="839" alt="image" src="https://github.com/user-attachments/assets/e5eca7eb-c561-478c-a831-4a199b480838" />
+
+Our answer is **281** bytes.
+
+
+**What was the Server header for the malicious domain from the previous question?**
+
+We can find this in the same follow **HTTP** stream panel from earlier:
+
+<img width="1255" height="545" alt="image" src="https://github.com/user-attachments/assets/0473dc40-534b-43bc-bf51-fbdbc16b0659" />
+
+Answer: **Apache/2.4.49 (cPanel) OpenSSL/1.1.1l mod_bwlimited/1.4**
+
+**The malware used an API to check for the IP address of the victim’s machine. What was the date and time when the DNS query for the IP check domain occurred? (answer format: yyyy-mm-dd hh:mm:ss UTC)**
+
+When we were looking at the TLS/HTTPS requests we noticed that their were multiple calls to **"api.ipify.org"**
+
+Let's set out old filter and check for that:
+
+<img width="1797" height="493" alt="image" src="https://github.com/user-attachments/assets/a9c05fb5-a410-4118-9e84-5d3542fc67d8" />
+
+We can also do research on what this domain actually is:
+
+<img width="800" height="447" alt="image" src="https://github.com/user-attachments/assets/3403f4ef-54de-4be4-91d2-ae8248219c8c" />
+
+This seems to be exactly what we are looking for, now lets switch gears and look for DNS protocol calls that are linked to this domain.
+
+We can set the filter to **dns** and click the number panel in order to order all packets in order, now we use control F and select string and enter **ipify** to find dns requests that match this:
+
+<img width="1890" height="532" alt="image" src="https://github.com/user-attachments/assets/ac6d0d0b-f5f8-493f-8113-2c6845f7a0c5" />
+
+We have found the first DNS request attempting to resolve the domain to an IP address, we can find the UTC timestamp in the left hand panel:
+
+<img width="1331" height="925" alt="image" src="https://github.com/user-attachments/assets/b6d62691-90da-44f2-861f-4883c4ee62a9" />
+
+**2021-09-24 17:00:04** Is our answer**.
+
+
+**What was the domain in the DNS query from the previous question?**
+
+We already know this: **api.ipify.org** (non-malicous)
+
+
+**Looks like there was some malicious spam (malspam) activity going on. What was the first MAIL FROM address observed in the traffic?**
+
+We saw a lot of mail and smtp related requests we needed to filter out earlier, let's check for all logged events using the SMTP protocol:
+
+Set the filter to SMTP and lets look for the first MAIL FROM address:
+
+<img width="1864" height="463" alt="image" src="https://github.com/user-attachments/assets/c949ffbc-b8f4-4549-8fe5-7398dfa045a4" />
+
+And we have found it: **farshin@mailfa[.]com**
+
+**How many packets were observed for the SMTP traffic?**
+
+We can keep our current filter and check the lower right pane:
+
+<img width="292" height="41" alt="image" src="https://github.com/user-attachments/assets/3d3e60c1-0abe-46f8-a893-10fb965ab706" />
+
+Answer is **1439** Packets
+
+
+## Summary
+
+
+
 
 
 
