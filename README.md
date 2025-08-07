@@ -10,7 +10,7 @@
 
 ✔️ [Conti](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Conti.md) (APT, Ransomware)     (Complete)
 
-☐ Carnage (Pcap/Wireshark) (50% complete)
+✔️ [Carnage](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Carnage.md) (Pcap/Wireshark) (complete)
 
 ☐ REvil Corp (APT, Forensics focused using Redline Toolset)
 
