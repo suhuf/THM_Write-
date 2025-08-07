@@ -166,15 +166,81 @@ Now let's see what is present when we apply this filter:
 <img width="1821" height="214" alt="image" src="https://github.com/user-attachments/assets/4a62dc01-aefe-4054-bfa0-075860447ab7" />
 
 So our answers for this question are:
-**finejewels[.]com[.]au, thietbiagt[.]com, new[.]americold[.]com** In that order **Defanged**
 
+**finejewels[.]com[.]au, thietbiagt[.]com, new[.]americold[.]com**. The answer is expected to be in that order **Defanged**
+
+
+**Which certificate authority issued the SSL certificate to the first domain from the previous question?**
+
+We can sort communiction to the domains according to packet number by selecting **No.** where we can see our first domain is the **finejewels[.]com[.]au** domain let's follow the stream to get some more information:
+
+<img width="1286" height="766" alt="image" src="https://github.com/user-attachments/assets/e487360f-5d50-47f0-9878-771929e78eb8" />
+
+Let's click **TCP** and see where it takes us:
+
+<img width="1264" height="899" alt="image" src="https://github.com/user-attachments/assets/73788b77-c4fd-4a59-a311-151cd41d1c0e" />
+
+We can see clearly that the certificate authority is **GoDaddy**, We should provide this as our answer.
+
+
+## C2 Information
+
+
+**What are the two IP addresses of the Cobalt Strike servers? Use VirusTotal (the Community tab) to confirm if IPs are identified as Cobalt Strike C2 servers. (answer format: enter the IP addresses in sequential order)**
+
+If we remember from before, we were witnessing constant **HTTP** communications with a server right after initial compromise. The infected host was frequenting sending undeciferable POST requests to that IP address. This type of behavior can be indicative of a C2.
+
+Let's go back to our clear text **HTTP** filter:
+
+<img width="1819" height="477" alt="image" src="https://github.com/user-attachments/assets/282827b5-d6ae-4643-bf57-0c16a5a76da6" />
+
+There are two IPs here that are suspicious: **208[.]91[.]128[.]6** and **185[.]106[.]96[.]158** , we don't exactly know for sure if they are Cobalt Strike servers, but we should check them in virus total anyways since they are obvious connected to the comprimisation of the system. 
+
+Our first IP does not return anythign for VT:
+
+<img width="1617" height="854" alt="image" src="https://github.com/user-attachments/assets/df44645e-0a2a-40aa-aa44-2f1809aa866e" />
+
+Our second IP Does however turn up results on VT:
+
+<img width="1574" height="421" alt="image" src="https://github.com/user-attachments/assets/0a24703c-dd03-47a3-b8d0-7b8b32db523b" />
+
+We can check the community tab for more information on the server:
+
+<img width="728" height="309" alt="image" src="https://github.com/user-attachments/assets/036e864b-643f-4bbe-80a1-3903a93d5f73" />
+
+It seems to be under suspicion for being a **C2 Server**, let's take note of that.
+
+Despite the second one turning positive it would be necessary in a real-world scenario to investigate, however, due to the wording of the question we know for sure their should be mention of the IP being used as a C2 server in VT. As a result we should continue our search
+
+There are not many other long conversations that we see our victim have with other IPs that we would suspect are from a **C2** under the HTTP protocol. Let's check HTTPS via the TLS filter as we know this threat actor does make use of HTTPS.
+
+<img width="1848" height="471" alt="image" src="https://github.com/user-attachments/assets/47719e59-39cd-41ff-a391-4f313c615d9c" />
+
+When checking this, we should ignore whatever is either most likely to be benign or is not relevant to the question. Any server names that contain microsoft, smtp, outlook, known popular domains We should ignore:
+
+<img width="1506" height="409" alt="image" src="https://github.com/user-attachments/assets/2cebf954-ccbd-4a96-a398-712a0811d905" />
+
+**"Securitybusinpuff[.]com"** stands out as a suspicious domain, we should check its respective IP on VT for more information: **185[.]125[.]204[.]174** .
+
+
+<img width="1614" height="715" alt="image" src="https://github.com/user-attachments/assets/120409bd-1d97-4587-bb28-cff7c23eec70" />
+
+The ip does not get many hits on AVs, however lets just the community tab for more info:
+
+<img width="1570" height="263" alt="image" src="https://github.com/user-attachments/assets/9cf81514-e0ef-484a-9000-5042cb7b5e35" />
+
+It is noted to be a C2 server, since the question is worded the way it is, we can be fairly confident of this and submit our answer as this:
+
+**185[.]106[.]96[.]158**, **185[.]125[.]204[.]174**  *They expect the Answer Defanged
+
+
+**What is the Host header for the first Cobalt Strike IP address from the previous question?**
 
 
 
 ## Initial Compromise
 
 
-## C2 Information
 
 
 
