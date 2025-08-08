@@ -12,7 +12,7 @@
 
 ✔️ [Carnage](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Carnage.md) (Pcap/Wireshark, C2 Traffic Analysis) (Complete)
 
-☐ Benign (Splunk, Incident response threat detection)
+☐ Benign (Splunk, Win Event Logs, Threat detection)
 
 ☐ REvil Corp (APT, Forensics focused using Redline Toolset)
 
