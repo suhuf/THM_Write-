@@ -12,6 +12,8 @@
 
 ✔️ [Carnage](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Carnage.md) (Pcap/Wireshark, C2 Traffic Analysis) (Complete)
 
+☐ Benign (Splunk, Incident response threat detection)
+
 ☐ REvil Corp (APT, Forensics focused using Redline Toolset)
 
 ☐ ItsyBitsy (ELK, Elastic Kibana)
@@ -19,8 +21,6 @@
 ☐ Warzone 1 (PCAP/Brim)
 
 ☐ Warzone 2 (PCAP/Brim)
-
-☐ Benign
 
 
 ☐ Friday overtime (real world APT artifacts on Evasive Panda APT)
