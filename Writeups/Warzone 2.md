@@ -60,9 +60,11 @@ our IP answer is 185[.]118[.]164[.]8 (Defanged)   **** explain defanging here
  
 
 
-
-
 **Provide the full URI for the malicious downloaded file. In your answer, defang the URI.**
+
+We have already identified the alert log in Brim, from the Brim log details we can also follow the exact packet in **Wireshark** and then follow the stream and gain all of the information regarding this specific interaction.
+
+
 
 
 
