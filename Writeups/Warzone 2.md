@@ -81,5 +81,6 @@ We need to find the download and its detailed information, to do this we right c
 
 We can now see the details we were in need of in the TCP Stream
 
+<img width="639" height="623" alt="image" src="https://github.com/user-attachments/assets/80cbd46b-d7f5-451c-9373-c6e8e7a7034b" />
 
 
