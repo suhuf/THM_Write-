@@ -42,3 +42,29 @@ In the alert.signature field we can find our answer; **ET MALWARE Likely Evil EX
 Here we can use the same filter as before, except changing the category to: **What was the alert signature for Potential Corporate Privacy Violation?**
 
 and doing the same steps
+
+<img width="842" height="680" alt="image" src="https://github.com/user-attachments/assets/e8ac1b08-5de2-405e-9389-5face78add32" />
+
+<img width="998" height="818" alt="image" src="https://github.com/user-attachments/assets/e61bbd30-b099-4100-b803-fba847c64e0e" />
+
+Our signature answer in this case is: **ET POLICY PE EXE or DLL Windows file download HTTP**
+
+
+**What was the IP to trigger either alert? Enter your answer in a defanged format.**
+
+We can look back at the earlier log details panel and find the requested IP in the **src_ip** field 
+
+<img width="1372" height="802" alt="image" src="https://github.com/user-attachments/assets/e0ecb265-5171-4325-96a9-a3587d1b3067" />
+
+our IP answer is 185[.]118[.]164[.]8 (Defanged)   **** explain defanging here
+ 
+
+
+
+
+**Provide the full URI for the malicious downloaded file. In your answer, defang the URI.**
+
+
+
+
+
