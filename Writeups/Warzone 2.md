@@ -65,8 +65,21 @@ our IP answer is 185[.]118[.]164[.]8 (Defanged)   **** explain defanging here
 We have already identified the alert log in Brim, from the Brim log details we can also follow the exact packet in **Wireshark** and then follow the stream and gain all of the information regarding this specific interaction.
 
 
+We need to go to our first log associated with the **"Likely Evil EXE"** alert and click on this icon:
 
+<img width="705" height="641" alt="image" src="https://github.com/user-attachments/assets/8cc49628-2d9b-41d4-b029-721ef43b64f1" />
 
+Following this **Wireshark** will be opened and will highlight the associated packet:
+
+<img width="746" height="462" alt="image" src="https://github.com/user-attachments/assets/7f271284-8400-482c-8ef0-94f9a243fe83" />
+
+We need to find the download and its detailed information, to do this we right click on the packet, hover on follow, and the select **TCP Stream**
+
+<img width="1017" height="636" alt="image" src="https://github.com/user-attachments/assets/c3a5b30d-da4d-4ca1-8e83-6506911b37cf" />
+
+<img width="642" height="634" alt="image" src="https://github.com/user-attachments/assets/fcf44f80-bd51-447c-b809-2a603d956b1e" />
+
+We can now see the details we were in need of in the TCP Stream
 
 
 
