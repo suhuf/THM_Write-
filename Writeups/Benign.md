@@ -87,6 +87,24 @@ MITRE's list of real-world examples implementing this tactic: <https://attack.mi
 
 **Which user from the HR department was observed to be running scheduled tasks?**
 
+We can filter for all logs that have the "schtasks.exe" string in them via this**:
+
+_index=* schtasks.exe_
+
+After this we can select the Username field and view all the users associated with these logs:
+
+<img width="1096" height="778" alt="image" src="https://github.com/user-attachments/assets/66d6c3cf-18ed-41d7-a6fd-f87e96ad7bfb" />
+
+We can see **Chris.fort** has a single log using this, let's click on it and investigate:
+
+<img width="1536" height="845" alt="image" src="https://github.com/user-attachments/assets/032d6f14-2ed2-44e1-ab12-434872996434" />
+
+We can confirm that this user is using task scheduler to run a binary **onstart**.
+
+our answer is **Chris.fort**
+
+
+
 \*\*Return and review \*\*
 
 ## C2 Info & Post Exploitation
