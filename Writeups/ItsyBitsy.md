@@ -46,6 +46,7 @@ Our answer should be **1482**
 **What is the IP associated with the suspected user in the logs?**
 
 
+
 **The user’s machine used a legit windows binary to download a file from the C2 server. What is the name of the binary?**
 
 
