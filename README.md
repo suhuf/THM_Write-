@@ -12,7 +12,7 @@
 
 ✔️ [Carnage](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Carnage.md) (Pcap/Wireshark, C2 Traffic Analysis) (Complete)
 
-✔️ [Benign](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Benign.md) (Splunk, Win Event Logs, Threat detection), (Complete)
+✔️ [Benign](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Benign.md) (Splunk, Win Event Logs, Threat detection), (Complete) Most recent
 
 ☐ REvil Corp (APT, Forensics focused using Redline Toolset) **WIP 50%**
 
