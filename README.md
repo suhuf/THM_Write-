@@ -16,7 +16,7 @@
 
 ☐ REvil Corp (APT, Forensics focused using Redline Toolset) **WIP 50%**
 
-☐ ItsyBitsy (ELK, Elastic Kibana)
+☐ ItsyBitsy (ELK, Elastic Kibana) 25% (Started)
 
 ☐ Warzone 1 (PCAP/Brim)
 
