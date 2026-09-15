@@ -100,6 +100,54 @@ With this we can make out the full URL to be: **awh93dhkylps5ulnq-be[.]com/czwih
 We can provide this as our answer, make sure the answer is defanged as above.
 
 
+**What is the name of the payload within the cab file?** 
+
+For this question there are quite a few routes we could take, so let's check the hint to get a better idea of what exactly we are supposed to find here:
+
+
+<img width="354" height="214" alt="image" src="https://github.com/user-attachments/assets/b43bcc27-214d-4d99-99c4-9b7cf71f08f1" />
+
+Let's do this and see what we can find, it is always a good idea to refer back to already documented specimens when trying to identify a threat.
+
+We can do this by moving back to **WireShark** and checking the file tab,
+
+We then select "**Export**" and choose export objects, we then select HTTP and choose an appropriate directory to export to, we should take note of this as we will need to access this directory in the near future
+
+<img width="486" height="515" alt="image" src="https://github.com/user-attachments/assets/301253a6-95d5-4812-84c9-a272a2a1ba33" />
+
+
+Now we need to take the hash of the file, we can open a terminal session and move to the respective directory. In my case it is in downloads and I have renamed the file to "**dragon.cab**" so it is easier to interact with without all of the special characters.
+
+we now use this command:  **md5sum <file name>** and copy the hash we are given
+
+<img width="725" height="486" alt="image" src="https://github.com/user-attachments/assets/dde110e0-685d-47a3-90ae-68d3b272a028" />
+
+And we now search for virus total and see what results we get when we put the MD5Hash in the searchbar:
+
+<img width="1863" height="890" alt="image" src="https://github.com/user-attachments/assets/fa33848a-fd44-4f2f-ae3d-d6e1b12bf62f" />
+
+We can see that the file is really a DLL, the payload is identified as draw.dll, and over 55 vendors view this as malicious.
+
+We should provide **draw.dll** as our answer.
+
+**What is the user-agent associated with this network traffic?**
+
+Now we need to go back to the **TCP stream** page/panel and take note of what the user agent was within the **TCP stream** for the packet that caused the initial alert:
+
+Again we select packet, right click, and do follow TCP stream:
+
+<img width="888" height="831" alt="image" src="https://github.com/user-attachments/assets/74edea25-9387-4a93-970c-e91c467a7b66" />
+
+This entire string; **Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; WOW64; Trident/8.0; .NET4.0C; .NET4.0E)**
+
+is our answer for the **user-agent**.
+
+
+**What other domains do you see in the network traffic that are labelled as malicious by VirusTotal? Enter the domains defanged and in alphabetical order. (format: domain[.]zzz,domain[.]zzz)**
+
+
+
+
 
 
 
