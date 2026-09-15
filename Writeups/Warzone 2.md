@@ -56,7 +56,11 @@ We can look back at the earlier log details panel and find the requested IP in t
 
 <img width="1372" height="802" alt="image" src="https://github.com/user-attachments/assets/e0ecb265-5171-4325-96a9-a3587d1b3067" />
 
-our IP answer is 185[.]118[.]164[.]8 (Defanged)   **** explain defanging here
+our IP answer is 185[.]118[.]164[.]8 (Defanged) 
+
+*Note that it was requested that our answer be "Defanged" and I have provided the answer in _Defanged_ form. Defanging is when a malicous link or IP address is provided in a safer format that does not lead to detonation (exaggrative
+
+wording but basically clicking the IP or link by accident and then risking compromise). This is done via adding brackets '[]' around the periods in an IP or URL.
  
 
 
@@ -82,5 +86,23 @@ We need to find the download and its detailed information, to do this we right c
 We can now see the details we were in need of in the TCP Stream
 
 <img width="639" height="623" alt="image" src="https://github.com/user-attachments/assets/80cbd46b-d7f5-451c-9373-c6e8e7a7034b" />
+
+in the **Host** area we can see the **Host** domain that is associated with the URL the user took the download from:
+
+**awh93dhkylps5ulnq-be[.]com**
+
+In the **GET** setion we can also see the exact page they requested from the domain, meaning the last part of the URL:
+
+**/czwih/fxla[.]php?l=gap1[.]cab**
+
+With this we can make out the full URL to be: **awh93dhkylps5ulnq-be[.]com/czwih/fxla[.]php?l=gap1[.]cab**  
+
+We can provide this as our answer, make sure the answer is defanged as above.
+
+
+
+
+
+
 
 
