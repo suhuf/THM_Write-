@@ -146,6 +146,50 @@ is our answer for the **user-agent**.
 **What other domains do you see in the network traffic that are labelled as malicious by VirusTotal? Enter the domains defanged and in alphabetical order. (format: domain[.]zzz,domain[.]zzz)**
 
 
+For this, we should move back brim, lets reset our work we did in brim and return to the base .pcap file in brim, Now lets set a filter that does these 3 things:
+
+
+Sorts all DNS records
+
+Narrows down the response and the result by choosing to display only one of these 2 things,
+
+sort the results
+
+then only include unique results.
+
+We can do this via this one liner:
+
+**dns | cut query | sort | uniq**
+
+we now find these results through all of our logs:
+
+<img width="1416" height="671" alt="image" src="https://github.com/user-attachments/assets/4e5b2105-76ee-48e9-b588-bb6c3df1459e" />
+
+<img width="1420" height="626" alt="image" src="https://github.com/user-attachments/assets/101787e2-341a-42e7-b12c-0f7b5f6c61da" />
+
+
+
+**Review!**
+
+
+
+**There are IP addresses flagged as _Not Suspicious Traffic._ What are the IP addresses? Enter your answer in numerical order and defanged. (format: IPADDR,IPADDR)**
+
+For this we can filter our logs according to the alert category "Not Suspicious Traffic"
+
+
+
+**For the first IP address flagged as Not Suspicious Traffic. According to VirusTotal, there are several domains associated with this one IP address that was flagged as malicious. What were the domains you spotted in the network traffic associated with this IP address? Enter your answer in a defanged format. Enter your answer in alphabetical order, in a defanged format. (format: domain[.]zzz,domain[.]zzz,etc)**
+
+
+
+
+**Now for the second IP marked as Not Suspicious Traffic. What was the domain you spotted in the network traffic associated with this IP address? Enter your answer in a defanged format. (format: domain[.]zzz)**
+
+
+
+
+
 
 
 
