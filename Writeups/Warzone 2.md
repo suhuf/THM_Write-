@@ -168,6 +168,47 @@ we now find these results through all of our logs:
 <img width="1420" height="626" alt="image" src="https://github.com/user-attachments/assets/101787e2-341a-42e7-b12c-0f7b5f6c61da" />
 
 
+For this section we should recognize that virus total results are not consistent after time, virus total is a corroboration of analysis of multiple security vendors which is also updated overtime to include more security vendors of various values. 
+
+As a result, overtime it is more likely that a domain that was considered as safe at one time will later be judged as malicious as new vendors can have less rigorous requirements on what they label as malicious. 
+
+So we need to factor this in when looking at the results for this lab that is atleast 3-4 years old.
+
+So with that context let's check the hint we are given so that we are not wasting too much time
+
+<img width="450" height="180" alt="image" src="https://github.com/user-attachments/assets/59690e59-3eb7-4b93-8cd0-1c77458a0887" />
+
+We are able to see here that we are supposed only be factoring logs that have trigged the "Misc Activity" Alert Category. We can implement a filter that factors this and see what overlaps with the domains we have identified in virus total:
+
+First, we see 2 main source IPs:   
+
+<img width="1678" height="449" alt="image" src="https://github.com/user-attachments/assets/0f895229-f928-48a5-8f1e-41030368b572" />
+
+
+We can check this IP **185[.]118[.]164[.]8** in **Virus Total** and check the associated domains in the relations tab:
+
+
+<img width="1836" height="727" alt="image" src="https://github.com/user-attachments/assets/33679575-6fcb-42c3-9c1c-ab1c13ebf027" />
+
+
+We can also see here that these two domains are also associated in our Domain Name list we uncovered earlier:
+
+<img width="895" height="723" alt="image" src="https://github.com/user-attachments/assets/cb1a2ecc-2e8a-4933-9d4c-3de8619cb476" />
+
+
+Let's check the info on Virus Total for these domains:
+
+<img width="1877" height="336" alt="image" src="https://github.com/user-attachments/assets/de386e74-e039-441e-9991-e0339436edf8" />
+
+<img width="1528" height="655" alt="image" src="https://github.com/user-attachments/assets/68a4ad09-473a-4263-832b-c635b3e55718" />
+
+
+
+
+
+We should try **a-zcorner[.]com,knockoutlights[.]com** as our answer
+
+
 
 **Review!**
 
