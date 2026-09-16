@@ -14,13 +14,13 @@
 
 ✔️ [Benign](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Benign.md) (Splunk, Win Event Logs, Threat detection), (Complete) Most recent
 
-☐ REvil Corp (APT, Forensics focused using Redline Toolset) **WIP 50%**
+☐ [REvil Corp](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Benign.md) (APT, Forensics focused using Redline Toolset) **WIP 50%**
 
-☐ ItsyBitsy (ELK, Elastic Kibana) 25% (Started)
+☐ [ItsyBitsy](https://github.com/suhuf/THM_Write-/blob/main/Writeups/ItsyBitsy.md) (ELK, Elastic Kibana) 25% (Started)
+
+☐ [Warzone 2](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Warzone%202.md) (PCAP/Brim) **(90% Complete)**
 
 ☐ Warzone 1 (PCAP/Brim)
-
-☐ Warzone 2 (PCAP/Brim)
 
 
 ☐ Friday overtime (real world APT artifacts on Evasive Panda APT)
