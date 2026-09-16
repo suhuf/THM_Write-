@@ -229,9 +229,17 @@ We have found our two IP addresses, we should submit them as **64[.]225[.]65[.]1
 
 
 
+
 **Now for the second IP marked as Not Suspicious Traffic. What was the domain you spotted in the network traffic associated with this IP address? Enter your answer in a defanged format. (format: domain[.]zzz)**
 
 
+We can put this IP in virus total and perform the same actions we did earlier:
+
+<img width="1253" height="659" alt="image" src="https://github.com/user-attachments/assets/6f2d1ff1-a992-4670-8885-b2744ab8ed34" />
+
+and we can see in the list one of the domains we documented earlier as being associated with this IP address.
+
+we can submit **2partscow[.]top** as our answer
 
 
 
