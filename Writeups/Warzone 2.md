@@ -204,8 +204,6 @@ Let's check the info on Virus Total for these domains:
 
 
 
-
-
 We should try **a-zcorner[.]com,knockoutlights[.]com** as our answer
 
 
@@ -216,8 +214,14 @@ We should try **a-zcorner[.]com,knockoutlights[.]com** as our answer
 
 **There are IP addresses flagged as _Not Suspicious Traffic._ What are the IP addresses? Enter your answer in numerical order and defanged. (format: IPADDR,IPADDR)**
 
-For this we can filter our logs according to the alert category "Not Suspicious Traffic"
+For this we can filter our logs according to the alert category "Not Suspicious Traffic" and cut for specifically either the source or destination IP depending on what the traffic is, let's cut according to source ip (src_ip):
 
+we are going to use this command: **alert.category == "Not Suspicious Traffic"** to get the non suspicious traffic, **cut src_ip** to isolate the source ip, **sort** to organize in preparation for **uniq** and then add **uniq** after a pipe. All together it should look like this: **alert.category == "Not Suspicious Traffic" | cut src_ip | sort | uniq**
+
+
+<img width="1014" height="464" alt="image" src="https://github.com/user-attachments/assets/b70e17fc-d81c-444b-8aef-790af5695165" />
+
+We have found our two IP addresses, we should submit them as **64[.]225[.]65[.]166,142[.]93[.]211[.]176** (defanged)
 
 
 **For the first IP address flagged as Not Suspicious Traffic. According to VirusTotal, there are several domains associated with this one IP address that was flagged as malicious. What were the domains you spotted in the network traffic associated with this IP address? Enter your answer in a defanged format. Enter your answer in alphabetical order, in a defanged format. (format: domain[.]zzz,domain[.]zzz,etc)**
