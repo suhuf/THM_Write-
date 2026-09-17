@@ -1,19 +1,16 @@
-brim
-
 
 
 ## Introduction 
 
-In our environment we are going to be taking the role of a security analyst and analyzing PCAP files and their associated network alerts to get a better idea of whether we have a threat/true positive or not in our environment 
+In this scenario we are going to be taking the role of a security analyst and analyzing PCAP files and their associated network alerts to get a better idea of how to organize logs, identify IOCs, utilize VirusTotal to gather more info, and become more familiar with the tools: **Wireshark** & **Brim**
 
 
-*** Unfinished Review *****
 
 
 **What was the alert signature for A Network Trojan was Detected?**
 
 
-to view alerts and alert signatures within PCAP files, we need to use **Brim** we can select brim and upload the PCAP file to **Brim**, after that we can see the logs in Brim's **GUI**.
+To view alerts and alert signatures within PCAP files, we need to use **Brim** we can select brim and upload the PCAP file to **Brim**, after that we can see the logs in Brim's **GUI**.
 
 
 <img width="845" height="684" alt="image" src="https://github.com/user-attachments/assets/aa6201b7-c65f-4ee0-abe1-e05064462431" />
@@ -226,8 +223,14 @@ We have found our two IP addresses, we should submit them as **64[.]225[.]65[.]1
 
 **For the first IP address flagged as Not Suspicious Traffic. According to VirusTotal, there are several domains associated with this one IP address that was flagged as malicious. What were the domains you spotted in the network traffic associated with this IP address? Enter your answer in a defanged format. Enter your answer in alphabetical order, in a defanged format. (format: domain[.]zzz,domain[.]zzz,etc)**
 
+Let's put **64[.]255[.]65[.]166** in virus total and find domains that match what we are looking for:
+
+We select relations and check the domains:
 
 
+<img width="813" height="478" alt="image" src="https://github.com/user-attachments/assets/18a1f292-3b21-4cfa-a13d-8217865d18d1" />
+
+We see that these three domains are marked as malicious, and that these three domains are also present in our Domain Names extraction file from earlier
 
 
 **Now for the second IP marked as Not Suspicious Traffic. What was the domain you spotted in the network traffic associated with this IP address? Enter your answer in a defanged format. (format: domain[.]zzz)**
