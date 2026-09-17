@@ -16,6 +16,7 @@
 
 ✔️ [Warzone 2](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Warzone%202.md) (PCAP/Brim) (Complete) Most recent
 
+
 ☐ [REvil Corp](https://github.com/suhuf/THM_Write-/blob/main/Writeups/Benign.md) (APT, Forensics focused using Redline Toolset) **WIP 50%**
 
 ☐ [ItsyBitsy](https://github.com/suhuf/THM_Write-/blob/main/Writeups/ItsyBitsy.md) (ELK, Elastic Kibana) 25% (Started)
